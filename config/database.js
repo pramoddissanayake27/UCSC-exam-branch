@@ -1,4 +1,5 @@
 
 module.exports = {
-    "database":"mongodb://localhost:27017/WebProject"
+    "database":"mongodb://localhost:27017/WebProject",
+    "secret":"myapplicationsecretkey"
 };
