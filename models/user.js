@@ -31,3 +31,17 @@ module.exports.findByEmail = function (email, callback) {
 
 };
 
+module.exports.passwordCheck = function (plainPassword, hash, callback) {
+    // Load hash from your password DB.
+    bcrypt.compare(plainPassword, hash, function(err, res) {
+        if (err) throw err;
+        
+        if (res){
+            callback(null,res);
+        }
+    });
+};
+module.exports.findUserById = function () {
+
+};
+

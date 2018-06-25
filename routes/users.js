@@ -30,9 +30,19 @@ router.post("/login",function (req, res) {
     User.findByEmail(email, function (err, user) {
         if (err) throw err;
 
-        if (user){
-            console.log(user);
+        if (!user){
+            //if there is not a such user in the db give an error msg
+            res.json({state:false, msg:"no user found!"});
         }
+        User.passwordCheck(password, user.password,function (err, match) {
+            if (err) throw err;
+
+            if(match){
+
+
+
+            }
+        });
     });
 });
 module.exports = router;
