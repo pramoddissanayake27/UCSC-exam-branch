@@ -2,6 +2,9 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const jwt = require('jsonwebtoken'); //require the implementation of JSON-webtoken
+const config = require('../config/database');
+const passport = require('passport');
 
 router.post("/register",function (req, res) {
     const newUser = new User({
@@ -39,10 +42,29 @@ router.post("/login",function (req, res) {
 
             if(match){
 
+                const token = jwt.sign(user.toJSON(), config.secret, {  //create a web token
+                    expiresIn:86400            // 1 day
+                });
+                res.json({
 
+                    state:true,
+                    token: "JWT"+token,
+                    user:{                               //my response
+                        id:user._id,
+                        name:user.name,
+                        username:user.username,
+                        email:user.email
+                    }
+
+                })
 
             }
         });
     });
 });
+router.post("/profile", passport.authenticate('jwt', { session: false }), function(req, res) {
+        res.json({user:req.user});
+    }
+);
+
 module.exports = router;

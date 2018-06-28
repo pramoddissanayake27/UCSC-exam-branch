@@ -1,0 +1,26 @@
+<form (submit)="registerData()" >
+  <fieldset>
+    <legend>Register for an Exam</legend>
+
+    <div class="form-group">
+      <label for="inputUsername">Username</label>
+      <input type="text" class="form-control" id="inputUsername" placeholder="Choose a username" name="username" [(ngModel)]="username" >
+    </div>
+
+    <div class="form-group">
+      <label for="inputName">Name</label>
+      <input type="text" class="form-control" id="inputName" placeholder="Your Name here" name="name" [(ngModel)]="name" >
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail">Email address</label>
+      <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email" [(ngModel)]="email" >
+    </div>
+    <div class="form-group">
+      <label for="inputPassword">Password</label>
+      <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password" [(ngModel)]="password" >
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </fieldset>
+</form>

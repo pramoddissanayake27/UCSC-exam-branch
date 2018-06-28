@@ -13,7 +13,7 @@ opts.secretOrKey = config.secret;
 
 module.exports = function (passport) {
     passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-        User.findUserById({id: jwt_payload.sub}, function(err, user) {  // checks whether is there a such user with the use of this mongoose method
+        User.findUserById({_id: jwt_payload._doc._id}, function(err, user) {  // checks whether is there a such user with the use of this mongoose method
             if (err) {
                 return done(err, false);
             }
