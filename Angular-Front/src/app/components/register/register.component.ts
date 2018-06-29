@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../../service/auth.service";
+import { FlashMessagesService } from 'angular2-flash-messages';
+import {state} from "@angular/animations";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -12,7 +16,11 @@ export class RegisterComponent implements OnInit {
   email:String;
   password:String;
 
-  constructor() { }
+  constructor(
+    private authService:AuthService,
+    private flashMessage:FlashMessagesService,
+    private router:Router
+  ) { }
 
   ngOnInit() {}
 
@@ -23,7 +31,13 @@ export class RegisterComponent implements OnInit {
       email: this.email,
       password: this.password
     };
-    console.log(user);
+
+    this.authService.registerUser(user).subscribe(res => {
+
+        this.flashMessage.show('Registration Successful!', {cssClass: 'alert-success', timeout: 2000}); //setting a flash message to display that registration succeeded.
+        this.router.navigate(['/login']); //if successful go back to login page
+    })
+
 
   }
 
